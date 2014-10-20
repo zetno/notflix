@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Model {
 
@@ -21,6 +22,16 @@ public class Model {
 		movies = new ArrayList<Movie>();
 		users = new ArrayList<User>();
 		ratings = new ArrayList<Rating>();
+
+		Movie m1 = new Movie(1, 121232523, "The Movie", new Date(), 120,
+				"M. Lemson", "A great movie");
+		movies.add(m1);
+		Movie m2 = new Movie(2, 221232523, "WERSFDWERWE", new Date(), 120,
+				"M. Lemson", "A great movie");
+		movies.add(m2);
+		Movie m3 = new Movie(3, 321232523, "SKDLFSD", new Date(), 120,
+				"M. Lemson", "A great movie");
+		movies.add(m3);
 	}
 
 	public void addRating(User user, Movie movie, int rating) {
