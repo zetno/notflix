@@ -5,6 +5,9 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @XmlRootElement(name = "movie")
 public class Movie {
@@ -24,6 +27,17 @@ public class Movie {
 	private String description;
 
 	@XmlAttribute
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	@XmlElement
+	@XmlTransient
+	@JsonIgnore
 	public int getMovieID() {
 		return movieID;
 	}
@@ -39,15 +53,6 @@ public class Movie {
 
 	public void setTtNr(int ttNr) {
 		this.ttNr = ttNr;
-	}
-
-	@XmlElement
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	@XmlElement
