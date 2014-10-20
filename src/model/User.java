@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @XmlRootElement(name = "user")
 public class User {
 
+	private String firstname;
+	private String middleName;
+	private String surname;
 	private String username;
 	private String password;
 	private String accessToken;
@@ -45,4 +48,15 @@ public class User {
 		this.accessToken = accessToken;
 	}
 
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 }

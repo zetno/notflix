@@ -1,21 +1,16 @@
 package resource;
 
-import java.util.ArrayList;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import model.Model;
-import model.Movie;
+import model.User;
 
 @Consumes("application/x-www-form-urlencoded")
 @Path("/user")
@@ -26,14 +21,26 @@ public class UserResource {
 
 	private Model model;
 
-
 	@POST
 	@Path("/add")
 	@Produces({ MediaType.APPLICATION_XML })
-	public String postNewUser(@HeaderParam("token") String token) {
+	public String postNewUser(@HeaderParam("firstname") String firstname,
+			@HeaderParam("middlename") String middlename,
+			@HeaderParam("surname") String surname,
+			@HeaderParam("username") String username,
+			@HeaderParam("password") String password) {
+		
+		User user = new User();
+		user.setFirstname(firstname);
+		user.setMiddleName(middlename);
+		user.setSurname(surname);
+		user.setUsername(username);
+		user.setPassword(password);
 		
 		model = (Model) context.getAttribute("Model");
 		
-		return "successfull";
+		boolean check = model.addUser(user);
+		
+		return String.valueOf(check);
 	}
 }

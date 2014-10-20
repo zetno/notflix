@@ -53,6 +53,17 @@ public class Model {
 		Rating r = new Rating(user, movie, rating);
 		ratings.add(r);
 	}
+	
+	public boolean addUser(User newUser){
+		for (User user : users) {
+			if(user.getUsername().equals(newUser.getUsername())){
+				return false;
+			}
+		}
+		
+		users.add(newUser);
+		return true;
+	}
 
 	public ArrayList<Movie> getMovies() {
 		return movies;

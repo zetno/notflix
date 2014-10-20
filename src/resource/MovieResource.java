@@ -29,7 +29,7 @@ public class MovieResource {
 
 	@GET
 	@Path("/movielist")
-	@Produces({ MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public ArrayList<Movie> getMovies(@HeaderParam("token") String token) {
 
 		model = (Model) context.getAttribute("Model");
@@ -52,7 +52,7 @@ public class MovieResource {
 
 	@GET
 	@Path("/{id}")
-	@Produces({ MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON })
 	public Movie getMovieByName(@HeaderParam("token") String token,
 			@PathParam("id") int movieID) {
 
