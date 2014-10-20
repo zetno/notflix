@@ -9,34 +9,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "movie")
 public class Movie {
 
-	@XmlAttribute
 	private int movieID;
-	@XmlElement
+
 	private int ttNr;
-	@XmlElement
+
 	private String title;
-	@XmlElement
+
 	private Date date;
-	@XmlElement
+
 	private int length;
-	@XmlElement
+
 	private String producer;
-	@XmlElement
+
 	private String description;
 
-	public Movie(int movieID, int ttNr, String title, Date date, int length,
-			String producer, String description) {
-
-		this.movieID = movieID;
-		this.ttNr = ttNr;
-		this.title = title;
-		this.date = date;
-		this.length = length;
-		this.producer = producer;
-		this.description = description;
-
-	}
-
+	@XmlAttribute
 	public int getMovieID() {
 		return movieID;
 	}
@@ -45,6 +32,7 @@ public class Movie {
 		this.movieID = movieID;
 	}
 
+	@XmlElement
 	public int getTtNr() {
 		return ttNr;
 	}
@@ -53,6 +41,7 @@ public class Movie {
 		this.ttNr = ttNr;
 	}
 
+	@XmlElement
 	public String getTitle() {
 		return title;
 	}
@@ -61,6 +50,7 @@ public class Movie {
 		this.title = title;
 	}
 
+	@XmlElement
 	public Date getDate() {
 		return date;
 	}
@@ -69,6 +59,7 @@ public class Movie {
 		this.date = date;
 	}
 
+	@XmlElement
 	public int getLength() {
 		return length;
 	}
@@ -77,6 +68,7 @@ public class Movie {
 		this.length = length;
 	}
 
+	@XmlElement
 	public String getProducer() {
 		return producer;
 	}
@@ -85,6 +77,7 @@ public class Movie {
 		this.producer = producer;
 	}
 
+	@XmlElement
 	public String getDescription() {
 		return description;
 	}

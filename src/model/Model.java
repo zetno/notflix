@@ -17,15 +17,33 @@ public class Model {
 		User u1 = new User("Jan", "ww");
 		users.add(u1);
 
-		Movie m1 = new Movie(1, 121232523, "The Movie", new Date(), 120,
-				"M. Lemson", "A great movie");
+		Movie m1 = new Movie();
+		m1.setTitle("The Movie");
+		m1.setMovieID(1);
+		m1.setTtNr(123);
+		m1.setLength(120);
+		m1.setProducer("M. Lemson");
+		m1.setDescription("A great movie");
+
+		Movie m2 = new Movie();
+		m2.setTitle("The Movie Part twos");
+		m2.setMovieID(2);
+		m2.setTtNr(123);
+		m2.setLength(120);
+		m2.setProducer("M. Lemson");
+		m2.setDescription("Another great movie");
+
+		Movie m3 = new Movie();
+		m3.setTitle("Movie the 3th");
+		m3.setMovieID(3);
+		m3.setTtNr(123);
+		m3.setLength(120);
+		m3.setProducer("M. Lemson");
+		m3.setDescription("Bad");
 		movies.add(m1);
-		Movie m2 = new Movie(2, 221232523, "Movie Part 2", new Date(), 120,
-				"M. Lemson", "A great movie");
 		movies.add(m2);
-		Movie m3 = new Movie(3, 321232523, "3th Film", new Date(), 120,
-				"M. Lemson", "A great movie");
 		movies.add(m3);
+
 	}
 
 	public void addRating(User user, Movie movie, int rating) {

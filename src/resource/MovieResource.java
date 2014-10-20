@@ -12,7 +12,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlElement;
 
 import model.Model;
 import model.Movie;
@@ -58,18 +57,19 @@ public class MovieResource {
 			@PathParam("id") int movieID) {
 
 		model = (Model) context.getAttribute("Model");
-		return new Movie(movieID, movieID, token, null, movieID, token, token);
 
-		// // user has to be logged in for access
-		// if (model.verifyWithToken(token)) {
-		// for (Movie movie : model.getMovies()) {
-		// if (movie.getMovieID() == movieID) {
-		// return movie;
-		// }
-		// }
-		// return null;
-		// } else {
-		// return null;
-		// }
+		// user has to be logged in for access
+		if (model.verifyWithToken(token)) {
+			for (Movie movie : model.getMovies()) {
+				if (movie.getMovieID() == movieID) {
+					return movie;
+				}
+			}
+			return null;
+			// throw new WebApplicationException();
+		} else {
+			return null;
+			// throw new WebApplicationException();
+		}
 	}
 }
