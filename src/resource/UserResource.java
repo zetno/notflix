@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -25,28 +26,14 @@ public class UserResource {
 
 	private Model model;
 
-	private ArrayList<Movie> movies;
 
-	@GET
-	@Path("/movielist")
+	@POST
+	@Path("/add")
 	@Produces({ MediaType.APPLICATION_XML })
-	public ArrayList<Movie> getMovies(@HeaderParam("token") String token) {
-
+	public String postNewUser(@HeaderParam("token") String token) {
+		
 		model = (Model) context.getAttribute("Model");
-
-		movies = new ArrayList<Movie>();
-
-		// user has to be logged in for access
-		if (model.verifyWithToken(token)) {
-
-			for (Movie movie : model.getMovies()) {
-				model.getMovies();
-				movies.add(movie);
-			}
-			return movies;
-		} else {
-			return null;
-			// throw new WebApplicationException();
-		}
+		
+		return "successfull";
 	}
 }
