@@ -9,27 +9,21 @@ public class Model {
 	private ArrayList<User> users;
 	private ArrayList<Rating> ratings;
 
-	private static Model model = null;
-
-	public static Model getInstance() {
-		if (model == null) {
-			model = new Model();
-		}
-		return model;
-	}
-
-	private Model() {
+	public Model() {
 		movies = new ArrayList<Movie>();
 		users = new ArrayList<User>();
 		ratings = new ArrayList<Rating>();
 
+		User u1 = new User("Jan", "ww");
+		users.add(u1);
+
 		Movie m1 = new Movie(1, 121232523, "The Movie", new Date(), 120,
 				"M. Lemson", "A great movie");
 		movies.add(m1);
-		Movie m2 = new Movie(2, 221232523, "WERSFDWERWE", new Date(), 120,
+		Movie m2 = new Movie(2, 221232523, "Movie Part 2", new Date(), 120,
 				"M. Lemson", "A great movie");
 		movies.add(m2);
-		Movie m3 = new Movie(3, 321232523, "SKDLFSD", new Date(), 120,
+		Movie m3 = new Movie(3, 321232523, "3th Film", new Date(), 120,
 				"M. Lemson", "A great movie");
 		movies.add(m3);
 	}
@@ -73,6 +67,33 @@ public class Model {
 			}
 		}
 		return ratingList;
+	}
+
+	public String authorizeUser(String username, String password) {
+
+		for (User u : users) {
+			if (u.getUsername().equals(username)
+					&& u.getPassword().equals(password)) {
+
+				String token = "ABCD";
+
+				u.setAccessToken(token);
+				return token;
+			}
+		}
+		return null;
+
+	}
+
+	public boolean verifyWithToken(String token) {
+		for (User u : users) {
+			if (u.getAccessToken() != null) {
+				if (u.getAccessToken().equals(token)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
