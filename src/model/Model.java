@@ -49,9 +49,47 @@ public class Model {
 
 	}
 
-	public void addRating(User user, Movie movie, int rating) {
-		Rating r = new Rating(user, movie, rating);
-		ratings.add(r);
+	public String addRating(String username, int movieID, int rating) {
+		if (doesMovieExists(movieID)) {
+			if (!doesRatingExists(movieID, username)) {
+				User user = getUserByName(username);
+				Movie movie = getMovieByID(movieID);
+
+				Rating r = new Rating(user, movie, rating);
+				ratings.add(r);
+				return "rated";
+			} else {
+				return "already rated";
+			}
+		} else {
+			return "movie doesn't exist";
+		}
+
+	}
+
+	public String removeRating(String username, int movieID) {
+
+		// TODO: controleren of accesstoken bij gebruiker hoort
+
+		if (doesMovieExists(movieID)) {
+			if (doesRatingExists(movieID, username)) {
+				for (Rating r : ratings) {
+					System.out.println("MOVIEID  " + r.getMovie().getMovieID());
+
+					if (r.getUser().getUsername().equals(username)
+							&& r.getMovie().getMovieID() == movieID) {
+						ratings.remove(r);
+						return "succesfull";
+					}
+				}
+			} else {
+				return "no rating";
+			}
+
+		} else {
+			return "movie doesn't exists";
+		}
+		return "failed";
 	}
 
 	public ArrayList<Movie> getMovies() {
@@ -119,9 +157,40 @@ public class Model {
 
 	public User getUserByName(String name) {
 		for (User u : users) {
-			return u;
+			if (u.getUsername().equals(name)) {
+				return u;
+			}
 		}
 		return null;
 	}
 
+	public Movie getMovieByID(int movieID) {
+		for (Movie m : movies) {
+			if (m.getMovieID() == movieID) {
+				return m;
+			}
+		}
+		return null;
+	}
+
+	public boolean doesMovieExists(int movieID) {
+		for (Movie movie : movies) {
+			if (movie.getMovieID() == movieID) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean doesRatingExists(int movieID, String username) {
+		if (ratings.size() != 0) {
+			for (Rating rating : ratings) {
+				if (rating.getMovie().getMovieID() == movieID
+						&& rating.getUser().getUsername().equals(username)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

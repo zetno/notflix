@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
@@ -26,55 +27,66 @@ public class RatingResource {
 
 	private Model model;
 
-
 	@POST
-	@Path("/add")
+	@Path("/add/{rating}")
 	@Produces({ MediaType.APPLICATION_XML })
-	public String postNewRating(@HeaderParam("token") String token) {
-		
+	public String postNewRating(@HeaderParam("token") String token,
+			@HeaderParam("username") String username,
+			@HeaderParam("movieID") int movieID, @PathParam("rating") int rating) {
+
 		model = (Model) context.getAttribute("Model");
-		
-		return "successfull";
+
+		if (model.verifyWithToken(token)) {
+			return model.addRating(username, movieID, rating);
+		}
+
+		return "failed";
 	}
-	
-	@POST
+
+	@DELETE
 	@Path("/delete")
 	@Produces({ MediaType.APPLICATION_XML })
-	public String postDeleteRating(@HeaderParam("token") String token) {
-		
+	public String postDeleteRating(@HeaderParam("token") String token,
+			@HeaderParam("username") String username,
+			@HeaderParam("movieID") int movieID) {
+
 		model = (Model) context.getAttribute("Model");
-		
-		return "successfull";
+
+		if (model.verifyWithToken(token)) {
+			return model.removeRating(username, movieID);
+		}
+
+		return "failed";
 	}
-	
+
 	@GET
 	@Path("/edit")
 	@Produces({ MediaType.APPLICATION_XML })
 	public String getEditRating(@HeaderParam("token") String token) {
-		
+
 		model = (Model) context.getAttribute("Model");
-		
+
 		return "successfull";
 	}
-	
+
 	@GET
 	@Path("/filmratings")
 	@Produces({ MediaType.APPLICATION_XML })
 	public String getRatings(@HeaderParam("token") String token) {
-		
+
 		model = (Model) context.getAttribute("Model");
-		
+
 		return "successfull";
 	}
-	
+
 	@GET
 	@Path("/ratedfilms")
 	@Produces({ MediaType.APPLICATION_XML })
 	public String getRatedFilms(@HeaderParam("token") String token) {
-		
+
 		model = (Model) context.getAttribute("Model");
-		
+
 		return "successfull";
 	}
-	
+
 }
