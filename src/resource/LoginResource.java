@@ -24,7 +24,7 @@ public class LoginResource {
 
 	@GET
 	@Consumes("application/x-www-form-urlencoded")
-	@Produces({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_XML })
 	public String loginUser(@HeaderParam("username") String username,
 			@HeaderParam("password") String password) {
 
