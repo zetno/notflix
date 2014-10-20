@@ -1,14 +1,27 @@
 package model;
+
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "movie")
 public class Movie {
 
+	@XmlAttribute
 	private int movieID;
+	@XmlElement
 	private int ttNr;
+	@XmlElement
 	private String title;
+	@XmlElement
 	private Date date;
+	@XmlElement
 	private int length;
+	@XmlElement
 	private String producer;
+	@XmlElement
 	private String description;
 
 	public Movie(int movieID, int ttNr, String title, Date date, int length,

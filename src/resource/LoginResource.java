@@ -1,6 +1,7 @@
 package resource;
 
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
 import javax.ws.rs.HeaderParam;
@@ -22,7 +23,8 @@ public class LoginResource {
 	private Model model;
 
 	@GET
-	@Produces({ MediaType.TEXT_PLAIN })
+	@Consumes("application/x-www-form-urlencoded")
+	@Produces({ MediaType.APPLICATION_JSON })
 	public String loginUser(@HeaderParam("username") String username,
 			@HeaderParam("password") String password) {
 

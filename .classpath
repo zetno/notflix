@@ -13,5 +13,11 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-annotations-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-core-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-databind-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-jaxrs-base-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-jaxrs-json-provider-2.4.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/maurice/Downloads/jackson-2.4.2/jackson-2.4.2/jackson-module-jaxb-annotations-2.4.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

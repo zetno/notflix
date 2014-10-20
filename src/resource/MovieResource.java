@@ -1,17 +1,23 @@
 package resource;
 
+import java.util.ArrayList;
+
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.xml.bind.annotation.XmlElement;
 
 import model.Model;
 import model.Movie;
 
+@Consumes("application/x-www-form-urlencoded")
 @Path("/movie")
 public class MovieResource {
 
@@ -20,46 +26,50 @@ public class MovieResource {
 
 	private Model model;
 
+	private ArrayList<Movie> movies;
+
 	@GET
 	@Path("/movielist")
-	@Produces({ MediaType.TEXT_PLAIN })
-	public String getMovies(@HeaderParam("token") String token) {
+	@Produces({ MediaType.APPLICATION_XML })
+	public ArrayList<Movie> getMovies(@HeaderParam("token") String token) {
 
 		model = (Model) context.getAttribute("Model");
 
+		movies = new ArrayList<Movie>();
+
 		// user has to be logged in for access
 		if (model.verifyWithToken(token)) {
-			String movies = "movies: \n";
 
 			for (Movie movie : model.getMovies()) {
 				model.getMovies();
-				movies += movie.getTitle() + "\n";
+				movies.add(movie);
 			}
 			return movies;
 		} else {
-			return "Not authorized";
+			return null;
+			// throw new WebApplicationException();
 		}
-
 	}
 
 	@GET
 	@Path("/{id}")
-	@Produces({ MediaType.TEXT_PLAIN })
-	public String getMovieByName(@HeaderParam("token") String token,
+	@Produces({ MediaType.APPLICATION_XML })
+	public Movie getMovieByName(@HeaderParam("token") String token,
 			@PathParam("id") int movieID) {
 
 		model = (Model) context.getAttribute("Model");
+		return new Movie(movieID, movieID, token, null, movieID, token, token);
 
-		// user has to be logged in for access
-		if (model.verifyWithToken(token)) {
-			for (Movie movie : model.getMovies()) {
-				if (movie.getMovieID() == movieID) {
-					return movie.getTitle();
-				}
-			}
-			return "Movie not found";
-		} else {
-			return "Not authorized";
-		}
+		// // user has to be logged in for access
+		// if (model.verifyWithToken(token)) {
+		// for (Movie movie : model.getMovies()) {
+		// if (movie.getMovieID() == movieID) {
+		// return movie;
+		// }
+		// }
+		// return null;
+		// } else {
+		// return null;
+		// }
 	}
 }
