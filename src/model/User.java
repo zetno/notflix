@@ -15,6 +15,8 @@ public class User {
 	private String accessToken;
 
 	@XmlElement
+	@XmlTransient
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -33,6 +35,8 @@ public class User {
 	}
 
 	@XmlElement
+	@XmlTransient
+	@JsonIgnore
 	public String getAccessToken() {
 		return accessToken;
 	}
