@@ -14,7 +14,10 @@ public class Model {
 		users = new ArrayList<User>();
 		ratings = new ArrayList<Rating>();
 
-		User u1 = new User("Jan", "ww");
+		User u1 = new User();
+		u1.setUsername("Jan");
+		u1.setPassword("ww");
+		u1.setAccessToken("AAAA");
 		users.add(u1);
 
 		Movie m1 = new Movie();
@@ -112,6 +115,13 @@ public class Model {
 			}
 		}
 		return false;
+	}
+
+	public User getUserByName(String name) {
+		for (User u : users) {
+			return u;
+		}
+		return null;
 	}
 
 }

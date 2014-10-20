@@ -1,21 +1,29 @@
 package model;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@XmlRootElement(name = "user")
 public class User {
 
 	private String username;
 	private String password;
 	private String accessToken;
 
-	public User(String username, String password) {
-		this.username = username;
-		this.password = password;
-		this.accessToken = "AAAA";
-	}
-
+	@XmlElement
 	public String getPassword() {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@XmlAttribute
 	public String getUsername() {
 		return username;
 	}
@@ -24,12 +32,13 @@ public class User {
 		this.username = username;
 	}
 
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-
+	@XmlElement
 	public String getAccessToken() {
 		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
 }
