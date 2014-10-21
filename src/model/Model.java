@@ -22,7 +22,9 @@ public class Model {
 		User u1 = new User("Jan", "", "Henk", "jan123", "ww");
 		users.add(u1);
 		User u2 = new User("Kees", "", "Boom", "keesie", "boom");
-		users.add(u1);
+		users.add(u2);
+		User u3 = new User("Kees", "", "Boom", "jaap", "fsdflkd");
+		users.add(u3);
 
 		Movie m1 = new Movie(1, 123, "The Movie", new Date(), 120, "Jan Henk",
 				"A great Movie");
@@ -34,6 +36,10 @@ public class Model {
 		movies.add(m1);
 		movies.add(m2);
 		movies.add(m3);
+
+		ratings.add(new Rating(u1, m1, 1));
+		ratings.add(new Rating(u2, m1, 3));
+		ratings.add(new Rating(u3, m1, 5));
 
 	}
 
@@ -169,7 +175,7 @@ public class Model {
 				}
 			}
 			if (counter >= 3) {
-				return overallRating / counter;
+				return new OverallRatingResponse(200, overallRating / counter);
 			}
 		}
 		return new ResponseMessage(404);
