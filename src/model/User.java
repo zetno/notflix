@@ -15,7 +15,6 @@ public class User {
 	private String surname;
 	private String username;
 	private String password;
-	private String accessToken;
 
 	@XmlElement
 	@XmlTransient
@@ -35,17 +34,6 @@ public class User {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	@XmlElement
-	@XmlTransient
-	@JsonIgnore
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
 	}
 
 	public void setFirstname(String firstname) {

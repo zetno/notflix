@@ -2,22 +2,26 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Random;
 
 public class Model {
 
 	private ArrayList<Movie> movies;
 	private ArrayList<User> users;
 	private ArrayList<Rating> ratings;
+	
+	private HashMap<String, String> tokens;
 
 	public Model() {
 		movies = new ArrayList<Movie>();
 		users = new ArrayList<User>();
 		ratings = new ArrayList<Rating>();
+		tokens = new HashMap<String, String>();
 
 		User u1 = new User();
 		u1.setUsername("Jan");
 		u1.setPassword("ww");
-		u1.setAccessToken("AAAA");
 		users.add(u1);
 
 		Movie m1 = new Movie();
@@ -100,6 +104,9 @@ public class Model {
 		}
 		
 		users.add(newUser);
+		
+		System.out.println("user added");
+		
 		return true;
 	}
 
@@ -139,30 +146,44 @@ public class Model {
 		return ratingList;
 	}
 
+	public String generateAccessToken(){
+		String token = "";
+		
+		Boolean check = true;
+		
+		do{
+			token = Double.toString(Math.floor((Math.random() * 1000)));
+			
+			if(!tokens.containsKey(token)){
+				check = false;
+			}
+		}
+		while(check);
+		
+		
+		return token;
+	}
+	
 	public String authorizeUser(String username, String password) {
 
 		for (User u : users) {
 			if (u.getUsername().equals(username)
 					&& u.getPassword().equals(password)) {
 
-				String token = "ABCD";
+				String token = generateAccessToken();
+				tokens.put(token, username);
 
-				u.setAccessToken(token);
 				return token;
 			}
 		}
 		return null;
-
 	}
 
 	public boolean verifyWithToken(String token) {
-		for (User u : users) {
-			if (u.getAccessToken() != null) {
-				if (u.getAccessToken().equals(token)) {
-					return true;
-				}
-			}
+		if(tokens.containsKey(token)){
+			return true;
 		}
+
 		return false;
 	}
 

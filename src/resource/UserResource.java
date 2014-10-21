@@ -23,7 +23,6 @@ public class UserResource {
 
 	@POST
 	@Path("/add")
-	@Produces({ MediaType.APPLICATION_XML })
 	public String postNewUser(@HeaderParam("firstname") String firstname,
 			@HeaderParam("middlename") String middlename,
 			@HeaderParam("surname") String surname,
