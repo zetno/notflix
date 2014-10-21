@@ -34,16 +34,9 @@ public class MovieResource {
 
 		model = (Model) context.getAttribute("Model");
 
-		movies = new ArrayList<Movie>();
-
 		// user has to be logged in for access
 		if (model.verifyWithToken(token)) {
-
-			for (Movie movie : model.getMovies()) {
-				model.getMovies();
-				movies.add(movie);
-			}
-			return movies;
+			return model.getMovies();
 		} else {
 			return null;
 			// throw new WebApplicationException();
@@ -60,12 +53,7 @@ public class MovieResource {
 
 		// user has to be logged in for access
 		if (model.verifyWithToken(token)) {
-			for (Movie movie : model.getMovies()) {
-				if (movie.getMovieID() == movieID) {
-					return movie;
-				}
-			}
-			return null;
+			return model.getMovieByID(movieID);
 			// throw new WebApplicationException();
 		} else {
 			return null;
