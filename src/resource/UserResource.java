@@ -2,12 +2,14 @@ package resource;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.PathParam;
 
 import model.Model;
 import model.ResponseMessage;
@@ -39,5 +41,32 @@ public class UserResource {
 			return user;
 		}
 		return new ResponseMessage(400);
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/{username}")
+	public Object getUserByUsername(@HeaderParam("token") String token,
+			@PathParam("username") String username) {
+
+		model = (Model) context.getAttribute("Model");
+
+		if (model.verifyWithToken(token)) {
+			return model.getUserByUsername(username);
+		}
+		return new ResponseMessage(401);
+	}
+
+	@GET
+	@Produces({ MediaType.APPLICATION_JSON })
+	@Path("/userlist")
+	public Object getUserlist(@HeaderParam("token") String token) {
+
+		model = (Model) context.getAttribute("Model");
+
+		if (model.verifyWithToken(token)) {
+			return model.getUsers();
+		}
+		return new ResponseMessage(401);
 	}
 }

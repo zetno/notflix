@@ -37,25 +37,29 @@ public class Model {
 
 	}
 
-	public Object addRating(String username, int movieID, int rating) {
-		if (doesMovieExists(movieID)) {
-			if (!doesRatingExists(movieID, username)) {
-				User user = getUserByName(username);
-				Movie movie = getMovieByID(movieID);
+	public Object addRating(String token, int movieID, int rating) {
 
-				Rating r = new Rating(user, movie, rating);
-				ratings.add(r);
-				return r;
+		User user = getUserWithToken(token);
+		String username = user.getUsername();
+
+		if (rating > 0 && rating <= 10) {
+			if (doesMovieExists(movieID)) {
+				if (!doesRatingExists(movieID, username)) {
+					Movie movie = getMovieByID(movieID);
+
+					Rating r = new Rating(user, movie, rating);
+					ratings.add(r);
+					return r;
+				}
 			}
 		}
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(404);
-		return error;
+		return new ResponseMessage(404);
 	}
 
-	public Object removeRating(String username, int movieID) {
+	public Object removeRating(String token, int movieID) {
 
-		// TODO: controleren of accesstoken bij gebruiker hoort
+		User user = getUserWithToken(token);
+		String username = user.getUsername();
 
 		if (doesMovieExists(movieID)) {
 			if (doesRatingExists(movieID, username)) {
@@ -70,39 +74,46 @@ public class Model {
 				}
 			}
 		}
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(404);
-		return error;
+		return new ResponseMessage(404);
 	}
 
-	public Object editRating(String username, int movieID, int newRating) {
-		if (doesMovieExists(movieID)) {
-			if (doesRatingExists(movieID, username)) {
-				for (Rating r : ratings) {
-					if (r.getUser().getUsername().equals(username)
-							&& r.getMovie().getMovieID() == movieID) {
-						r.setRating(newRating);
-						return r;
+	public Object editRating(String token, int movieID, int newRating) {
+
+		User user = getUserWithToken(token);
+		String username = user.getUsername();
+
+		if (newRating > 0 && newRating <= 10) {
+			if (doesMovieExists(movieID)) {
+				if (doesRatingExists(movieID, username)) {
+					for (Rating r : ratings) {
+						if (r.getUser().getUsername().equals(username)
+								&& r.getMovie().getMovieID() == movieID) {
+							r.setRating(newRating);
+							return r;
+						}
 					}
 				}
 			}
 		}
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(404);
-		return error;
+		return new ResponseMessage(404);
 	}
 
 	public boolean addUser(User newUser) {
-		for (User user : users) {
-			if (user.getUsername().equals(newUser.getUsername())) {
-				return false;
+
+		if (newUser.getUsername().length() > 0
+				&& newUser.getPassword().length() > 0) {
+			for (User user : users) {
+				if (user.getUsername().equals(newUser.getUsername())) {
+					return false;
+				}
 			}
+			users.add(newUser);
+			System.out.println("user added");
+
+			return true;
 		}
-		users.add(newUser);
+		return false;
 
-		System.out.println("user added");
-
-		return true;
 	}
 
 	public ArrayList<Movie> getMovies() {
@@ -170,7 +181,7 @@ public class Model {
 		Boolean check = true;
 
 		do {
-			token = Integer.toString((int) (Math.floor((Math.random() * 1000000))));
+			token = Double.toString(Math.floor((Math.random() * 1000)));
 
 			if (!tokens.containsKey(token)) {
 				check = false;
@@ -195,6 +206,13 @@ public class Model {
 		return null;
 	}
 
+	public User getUserWithToken(String token) {
+		String username = tokens.get("token");
+		User user = getUserByName(username);
+
+		return user;
+	}
+
 	public boolean verifyWithToken(String token) {
 		if (tokens.containsKey(token)) {
 			return true;
@@ -210,6 +228,15 @@ public class Model {
 			}
 		}
 		return null;
+	}
+
+	public Object getUserByUsername(String username) {
+		for (User u : users) {
+			if (u.getUsername().equals(username)) {
+				return u;
+			}
+		}
+		return new ResponseMessage(404);
 	}
 
 	public Movie getMovieByID(int movieID) {
