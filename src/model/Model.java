@@ -212,9 +212,9 @@ public class Model {
 		return null;
 	}
 
-	public Movie getMovieByID(int movieID) {
+	public Movie getMovieByID(int ttnr) {
 		for (Movie m : movies) {
-			if (m.getMovieID() == movieID) {
+			if (m.getTtNr() == ttnr) {
 				return m;
 			}
 		}

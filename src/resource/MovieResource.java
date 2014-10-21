@@ -47,13 +47,13 @@ public class MovieResource {
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object getMovieByName(@HeaderParam("token") String token,
-			@PathParam("id") int movieID) {
+			@PathParam("id") int ttNr) {
 
 		model = (Model) context.getAttribute("Model");
 
 		// user has to be logged in for access
 		if (model.verifyWithToken(token)) {
-			return model.getMovieByID(movieID);
+			return model.getMovieByID(ttNr);
 		} else {
 			return new ResponseMessage(401);
 
