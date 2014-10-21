@@ -9,6 +9,7 @@ public class TokenResponse extends ResponseMessage {
 		super(statusCode);
 		this.token = token;
 		this.user = user;
+		
 	}
 
 	public TokenResponse() {
