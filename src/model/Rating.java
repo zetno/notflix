@@ -1,5 +1,8 @@
 package model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "rating")
 public class Rating {
 
 	private Movie movie;

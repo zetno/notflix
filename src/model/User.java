@@ -1,7 +1,6 @@
 package model;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -16,7 +15,6 @@ public class User {
 	private String username;
 	private String password;
 
-	@XmlElement
 	@XmlTransient
 	@JsonIgnore
 	public String getPassword() {

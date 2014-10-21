@@ -13,17 +13,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Movie {
 
 	private int movieID;
-
 	private int ttNr;
-
 	private String title;
-
 	private Date date;
-
 	private int length;
-
 	private String producer;
-
 	private String description;
 
 	@XmlAttribute
@@ -35,7 +29,6 @@ public class Movie {
 		this.title = title;
 	}
 
-	@XmlElement
 	@XmlTransient
 	@JsonIgnore
 	public int getMovieID() {
@@ -46,7 +39,6 @@ public class Movie {
 		this.movieID = movieID;
 	}
 
-	@XmlElement
 	public int getTtNr() {
 		return ttNr;
 	}
@@ -55,7 +47,6 @@ public class Movie {
 		this.ttNr = ttNr;
 	}
 
-	@XmlElement
 	public Date getDate() {
 		return date;
 	}
@@ -64,7 +55,6 @@ public class Movie {
 		this.date = date;
 	}
 
-	@XmlElement
 	public int getLength() {
 		return length;
 	}
@@ -73,7 +63,6 @@ public class Movie {
 		this.length = length;
 	}
 
-	@XmlElement
 	public String getProducer() {
 		return producer;
 	}
@@ -82,7 +71,6 @@ public class Movie {
 		this.producer = producer;
 	}
 
-	@XmlElement
 	public String getDescription() {
 		return description;
 	}
