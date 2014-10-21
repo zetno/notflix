@@ -141,10 +141,27 @@ public class Model {
 			}
 			return ratingList;
 		}
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(404);
+		return new ResponseMessage(404);
+	}
 
-		return error;
+	public Object getOverallRatingFromMovie(int movieID) {
+
+		if (doesMovieExists(movieID)) {
+
+			int counter = 0;
+			int overallRating = 0;
+
+			for (Rating rating : ratings) {
+				if (rating.getMovie().getMovieID() == movieID) {
+					counter++;
+					overallRating += rating.getRating();
+				}
+			}
+			if (counter >= 3) {
+				return overallRating / counter;
+			}
+		}
+		return new ResponseMessage(404);
 	}
 
 	public String generateAccessToken() {

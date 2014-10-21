@@ -1,7 +1,5 @@
 package resource;
 
-import java.util.ArrayList;
-
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -12,14 +10,11 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import model.ResponseMessage;
 import model.Model;
-import model.Movie;
-import model.Rating;
 import model.User;
 
 @Consumes("application/x-www-form-urlencoded")
@@ -43,11 +38,7 @@ public class RatingResource {
 		if (model.verifyWithToken(token)) {
 			return model.addRating(username, movieID, rating);
 		}
-
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(401);
-
-		return error;
+		return new ResponseMessage(401);
 	}
 
 	@DELETE
@@ -62,11 +53,7 @@ public class RatingResource {
 		if (model.verifyWithToken(token)) {
 			return model.removeRating(username, movieID);
 		}
-
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(401);
-
-		return error;
+		return new ResponseMessage(401);
 	}
 
 	@PUT
@@ -83,11 +70,7 @@ public class RatingResource {
 			return model.editRating(username, movieID, newRating);
 
 		}
-
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(401);
-
-		return error;
+		return new ResponseMessage(401);
 	}
 
 	@GET
@@ -101,11 +84,7 @@ public class RatingResource {
 		if (model.verifyWithToken(token)) {
 			return model.getRatingsFromMovie(movieID);
 		}
-
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(401);
-
-		return error;
+		return new ResponseMessage(401);
 	}
 
 	@GET
@@ -121,10 +100,20 @@ public class RatingResource {
 			User user = model.getUserByName(username);
 			return model.getRatingsFromUser(user);
 		}
+		return new ResponseMessage(401);
+	}
 
-		ResponseMessage error = new ResponseMessage();
-		error.setStatusCode(401);
+	@GET
+	@Path("/overallfilmrating")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Object getOverallRating(@HeaderParam("token") String token,
+			@HeaderParam("movieID") int movieID) {
 
-		return error;
+		model = (Model) context.getAttribute("Model");
+
+		if (model.verifyWithToken(token)) {
+			return model.getRatingsFromMovie(movieID);
+		}
+		return new ResponseMessage(401);
 	}
 }

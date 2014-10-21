@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 
 import model.Model;
 import model.Movie;
+import model.ResponseMessage;
 
 @Consumes("application/x-www-form-urlencoded")
 @Path("/movie")
@@ -30,7 +31,7 @@ public class MovieResource {
 	@GET
 	@Path("/movielist")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ArrayList<Movie> getMovies(@HeaderParam("token") String token) {
+	public Object getMovies(@HeaderParam("token") String token) {
 
 		model = (Model) context.getAttribute("Model");
 
@@ -38,15 +39,14 @@ public class MovieResource {
 		if (model.verifyWithToken(token)) {
 			return model.getMovies();
 		} else {
-			return null;
-			// throw new WebApplicationException();
+			return new ResponseMessage(401);
 		}
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Movie getMovieByName(@HeaderParam("token") String token,
+	public Object getMovieByName(@HeaderParam("token") String token,
 			@PathParam("id") int movieID) {
 
 		model = (Model) context.getAttribute("Model");
@@ -54,10 +54,9 @@ public class MovieResource {
 		// user has to be logged in for access
 		if (model.verifyWithToken(token)) {
 			return model.getMovieByID(movieID);
-			// throw new WebApplicationException();
 		} else {
-			return null;
-			// throw new WebApplicationException();
+			return new ResponseMessage(401);
+
 		}
 	}
 }
