@@ -26,9 +26,9 @@ public class Model {
 
 		Movie m1 = new Movie(1, 123, "The Movie", new Date(), 120, "Jan Henk",
 				"A great Movie");
-		Movie m2 = new Movie(1, 123, "The Movie Part two", new Date(), 120,
+		Movie m2 = new Movie(2, 234, "The Movie Part two", new Date(), 120,
 				"Jan Kees", "Another great Movie");
-		Movie m3 = new Movie(1, 123, "Movie the 3th", new Date(), 120,
+		Movie m3 = new Movie(3, 345, "Movie the 3th", new Date(), 120,
 				"Jan Klaas", "Bad");
 
 		movies.add(m1);
