@@ -230,9 +230,9 @@ public class Model {
 		return null;
 	}
 
-<<<<<<< HEAD
-	public Movie getMovieByID(int ttnr) {
-=======
+
+	
+
 	public Object getUserByUsername(String username) {
 		for (User u : users) {
 			if (u.getUsername().equals(username)) {
@@ -242,8 +242,7 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Movie getMovieByID(int movieID) {
->>>>>>> 81f0945a3daa31f72229246a83fef21b541e670e
+	public Movie getMovieByID(int ttnr) {
 		for (Movie m : movies) {
 			if (m.getTtNr() == ttnr) {
 				return m;
