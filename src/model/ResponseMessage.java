@@ -7,6 +7,13 @@ public class ResponseMessage {
 
 	private int statusCode;
 
+	public ResponseMessage(int statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public ResponseMessage() {
+	}
+
 	public int getStatusCode() {
 		return statusCode;
 	}

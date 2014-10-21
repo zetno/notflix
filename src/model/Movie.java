@@ -20,6 +20,21 @@ public class Movie {
 	private String producer;
 	private String description;
 
+	public Movie() {
+
+	}
+
+	public Movie(int movieID, int ttNr, String title, Date date, int lenght,
+			String producer, String description) {
+		this.movieID = movieID;
+		this.ttNr = ttNr;
+		this.title = title;
+		this.date = date;
+		this.length = lenght;
+		this.description = description;
+		this.producer = producer;
+	}
+
 	@XmlAttribute
 	public String getTitle() {
 		return title;

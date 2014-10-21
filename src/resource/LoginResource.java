@@ -10,6 +10,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import model.Model;
+import model.ResponseMessage;
+import model.TokenResponse;
 import model.User;
 
 @Path("/login")
@@ -23,15 +25,16 @@ public class LoginResource {
 	@GET
 	@Consumes("application/x-www-form-urlencoded")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public User loginUser(@HeaderParam("username") String username,
+	public Object loginUser(@HeaderParam("username") String username,
 			@HeaderParam("password") String password) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.authorizeUser(username, password) != null) {
-			return model.getUserByName(username);
+			return new TokenResponse(200, model.authorizeUser(username,
+					password), model.getUserByName(username));
 		} else {
-			return null;
+			return new ResponseMessage(401);
 		}
 	}
 }

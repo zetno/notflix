@@ -19,34 +19,18 @@ public class Model {
 		ratings = new ArrayList<Rating>();
 		tokens = new HashMap<String, String>();
 
-		User u1 = new User();
-		u1.setUsername("Jan");
-		u1.setPassword("ww");
+		User u1 = new User("Jan", "", "Henk", "jan123", "ww");
+		users.add(u1);
+		User u2 = new User("Kees", "", "Boom", "keesie", "boom");
 		users.add(u1);
 
-		Movie m1 = new Movie();
-		m1.setTitle("The Movie");
-		m1.setMovieID(1);
-		m1.setTtNr(123);
-		m1.setLength(120);
-		m1.setProducer("M. Lemson");
-		m1.setDescription("A great movie");
+		Movie m1 = new Movie(1, 123, "The Movie", new Date(), 120, "Jan Henk",
+				"A great Movie");
+		Movie m2 = new Movie(1, 123, "The Movie Part two", new Date(), 120,
+				"Jan Kees", "Another great Movie");
+		Movie m3 = new Movie(1, 123, "Movie the 3th", new Date(), 120,
+				"Jan Klaas", "Bad");
 
-		Movie m2 = new Movie();
-		m2.setTitle("The Movie Part twos");
-		m2.setMovieID(2);
-		m2.setTtNr(123);
-		m2.setLength(120);
-		m2.setProducer("M. Lemson");
-		m2.setDescription("Another great movie");
-
-		Movie m3 = new Movie();
-		m3.setTitle("Movie the 3th");
-		m3.setMovieID(3);
-		m3.setTtNr(123);
-		m3.setLength(120);
-		m3.setProducer("M. Lemson");
-		m3.setDescription("Bad");
 		movies.add(m1);
 		movies.add(m2);
 		movies.add(m3);
@@ -114,7 +98,6 @@ public class Model {
 				return false;
 			}
 		}
-
 		users.add(newUser);
 
 		System.out.println("user added");

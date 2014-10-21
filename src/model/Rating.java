@@ -9,6 +9,9 @@ public class Rating {
 	private User user;
 	private int rating;
 
+	public Rating() {
+	}
+
 	public Rating(User user, Movie movie, int rating) {
 		this.user = user;
 		this.movie = movie;
