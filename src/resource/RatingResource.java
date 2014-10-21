@@ -44,7 +44,7 @@ public class RatingResource {
 	@Path("/delete")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object postDeleteRating(@HeaderParam("token") String token,
-			@HeaderParam("movieID") int ttID) {
+			@HeaderParam("ttID") int ttID) {
 
 		model = (Model) context.getAttribute("Model");
 

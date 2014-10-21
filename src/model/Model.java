@@ -182,7 +182,7 @@ public class Model {
 
 		do {
 			token = Integer
-					.toString((int) (Math.floor((Math.random() * 10000))));
+					.toString((int) (Math.floor((Math.random() * 100000000))));
 
 			if (!tokens.containsKey(token)) {
 				check = false;
