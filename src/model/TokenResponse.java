@@ -13,7 +13,6 @@ public class TokenResponse extends ResponseMessage {
 	}
 
 	public TokenResponse() {
-		
 	}
 
 	public String getToken() {
