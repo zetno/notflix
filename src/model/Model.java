@@ -181,7 +181,8 @@ public class Model {
 		Boolean check = true;
 
 		do {
-			token = Double.toString(Math.floor((Math.random() * 1000)));
+			token = Integer
+					.toString((int) (Math.floor((Math.random() * 10000))));
 
 			if (!tokens.containsKey(token)) {
 				check = false;
@@ -229,9 +230,6 @@ public class Model {
 		}
 		return null;
 	}
-
-
-	
 
 	public Object getUserByUsername(String username) {
 		for (User u : users) {
