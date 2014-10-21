@@ -170,7 +170,7 @@ public class Model {
 		Boolean check = true;
 
 		do {
-			token = Double.toString(Math.floor((Math.random() * 1000)));
+			token = Integer.toString((int) (Math.floor((Math.random() * 1000000))));
 
 			if (!tokens.containsKey(token)) {
 				check = false;

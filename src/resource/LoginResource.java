@@ -31,8 +31,7 @@ public class LoginResource {
 		model = (Model) context.getAttribute("Model");
 
 		if (model.authorizeUser(username, password) != null) {
-			return new TokenResponse(200, model.authorizeUser(username,
-					password), model.getUserByName(username));
+			return new TokenResponse(200, model.authorizeUser(username, password), model.getUserByName(username));
 		} else {
 			return new ResponseMessage(401);
 		}
