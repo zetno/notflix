@@ -207,7 +207,7 @@ public class Model {
 	}
 
 	public User getUserWithToken(String token) {
-		String username = tokens.get("token");
+		String username = tokens.get(token);
 		User user = getUserByName(username);
 
 		return user;
