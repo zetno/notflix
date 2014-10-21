@@ -33,13 +33,21 @@ public class UserResource {
 			@HeaderParam("username") String username,
 			@HeaderParam("password") String password) {
 
-		User user = new User(firstname, middlename, surname, username, password);
-
-		model = (Model) context.getAttribute("Model");
-
-		if (model.addUser(user)) {
-			return user;
+		if (middlename == null) {
+			middlename = "";
 		}
+		if (surname != null && firstname != null && username != null
+				&& password != null) {
+			User user = new User(firstname, middlename, surname, username,
+					password);
+
+			model = (Model) context.getAttribute("Model");
+
+			if (model.addUser(user)) {
+				return user;
+			}
+		}
+
 		return new ResponseMessage(400);
 	}
 

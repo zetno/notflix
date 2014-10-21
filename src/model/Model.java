@@ -37,15 +37,15 @@ public class Model {
 
 	}
 
-	public Object addRating(String token, int movieID, int rating) {
+	public Object addRating(String token, int ttID, int rating) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
 
 		if (rating > 0 && rating <= 10) {
-			if (doesMovieExists(movieID)) {
-				if (!doesRatingExists(movieID, username)) {
-					Movie movie = getMovieByID(movieID);
+			if (doesMovieExists(ttID)) {
+				if (!doesRatingExists(ttID, username)) {
+					Movie movie = getMovieByID(ttID);
 
 					Rating r = new Rating(user, movie, rating);
 					ratings.add(r);
@@ -56,16 +56,16 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object removeRating(String token, int movieID) {
+	public Object removeRating(String token, int ttID) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
 
-		if (doesMovieExists(movieID)) {
-			if (doesRatingExists(movieID, username)) {
+		if (doesMovieExists(ttID)) {
+			if (doesRatingExists(ttID, username)) {
 				for (Rating r : ratings) {
 					if (r.getUser().getUsername().equals(username)
-							&& r.getMovie().getMovieID() == movieID) {
+							&& r.getMovie().getTtNr() == ttID) {
 						ratings.remove(r);
 						ResponseMessage success = new ResponseMessage();
 						success.setStatusCode(200);
@@ -77,17 +77,17 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object editRating(String token, int movieID, int newRating) {
+	public Object editRating(String token, int ttID, int newRating) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
 
 		if (newRating > 0 && newRating <= 10) {
-			if (doesMovieExists(movieID)) {
-				if (doesRatingExists(movieID, username)) {
+			if (doesMovieExists(ttID)) {
+				if (doesRatingExists(ttID, username)) {
 					for (Rating r : ratings) {
 						if (r.getUser().getUsername().equals(username)
-								&& r.getMovie().getMovieID() == movieID) {
+								&& r.getMovie().getTtNr() == ttID) {
 							r.setRating(newRating);
 							return r;
 						}
@@ -99,10 +99,9 @@ public class Model {
 	}
 
 	public boolean addUser(User newUser) {
+
 		if (newUser.getUsername().length() > 0
-				&& newUser.getPassword().length() > 0
-				&& newUser.getFirstName().length() > 0
-				&& newUser.getSurname().length() > 0) {
+				&& newUser.getPassword().length() > 0) {
 			for (User user : users) {
 				if (user.getUsername().equals(newUser.getUsername())) {
 					return false;
@@ -141,13 +140,13 @@ public class Model {
 		return ratingList;
 	}
 
-	public Object getRatingsFromMovie(int movieID) {
+	public Object getRatingsFromMovie(int ttID) {
 
-		if (doesMovieExists(movieID)) {
+		if (doesMovieExists(ttID)) {
 			ArrayList<Rating> ratingList = new ArrayList<Rating>();
 
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getMovieID() == movieID) {
+				if (rating.getMovie().getTtNr() == ttID) {
 					ratingList.add(rating);
 				}
 			}
@@ -156,15 +155,15 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object getOverallRatingFromMovie(int movieID) {
+	public Object getOverallRatingFromMovie(int ttID) {
 
-		if (doesMovieExists(movieID)) {
+		if (doesMovieExists(ttID)) {
 
 			int counter = 0;
 			int overallRating = 0;
 
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getMovieID() == movieID) {
+				if (rating.getMovie().getTtNr() == ttID) {
 					counter++;
 					overallRating += rating.getRating();
 				}
@@ -250,19 +249,19 @@ public class Model {
 		return null;
 	}
 
-	public boolean doesMovieExists(int movieID) {
+	public boolean doesMovieExists(int ttID) {
 		for (Movie movie : movies) {
-			if (movie.getMovieID() == movieID) {
+			if (movie.getTtNr() == ttID) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean doesRatingExists(int movieID, String username) {
+	public boolean doesRatingExists(int ttID, String username) {
 		if (ratings.size() != 0) {
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getMovieID() == movieID
+				if (rating.getMovie().getTtNr() == ttID
 						&& rating.getUser().getUsername().equals(username)) {
 					return true;
 				}

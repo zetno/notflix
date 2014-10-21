@@ -30,12 +30,12 @@ public class RatingResource {
 	@Path("/add/{rating}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object postNewRating(@HeaderParam("token") String token,
-			@HeaderParam("movieID") int movieID, @PathParam("rating") int rating) {
+			@HeaderParam("ttID") int ttID, @PathParam("rating") int rating) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.verifyWithToken(token)) {
-			return model.addRating(token, movieID, rating);
+			return model.addRating(token, ttID, rating);
 		}
 		return new ResponseMessage(401);
 	}
@@ -44,12 +44,12 @@ public class RatingResource {
 	@Path("/delete")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object postDeleteRating(@HeaderParam("token") String token,
-			@HeaderParam("movieID") int movieID) {
+			@HeaderParam("movieID") int ttID) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.verifyWithToken(token)) {
-			return model.removeRating(token, movieID);
+			return model.removeRating(token, ttID);
 		}
 		return new ResponseMessage(401);
 	}
@@ -58,13 +58,12 @@ public class RatingResource {
 	@Path("/edit/{newRating}")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object getEditRating(@HeaderParam("token") String token,
-			@PathParam("newRating") int newRating,
-			@HeaderParam("movieID") int movieID) {
+			@PathParam("newRating") int newRating, @HeaderParam("ttID") int ttID) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.verifyWithToken(token)) {
-			return model.editRating(token, movieID, newRating);
+			return model.editRating(token, ttID, newRating);
 
 		}
 		return new ResponseMessage(401);
@@ -74,12 +73,12 @@ public class RatingResource {
 	@Path("/filmratings")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object getRatings(@HeaderParam("token") String token,
-			@HeaderParam("movieID") int movieID) {
+			@HeaderParam("ttID") int ttID) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.verifyWithToken(token)) {
-			return model.getRatingsFromMovie(movieID);
+			return model.getRatingsFromMovie(ttID);
 		}
 		return new ResponseMessage(401);
 	}
@@ -103,12 +102,12 @@ public class RatingResource {
 	@Path("/overallfilmrating")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public Object getOverallRating(@HeaderParam("token") String token,
-			@HeaderParam("movieID") int movieID) {
+			@HeaderParam("ttID") int ttID) {
 
 		model = (Model) context.getAttribute("Model");
 
 		if (model.verifyWithToken(token)) {
-			return model.getOverallRatingFromMovie(movieID);
+			return model.getOverallRatingFromMovie(ttID);
 		}
 		return new ResponseMessage(401);
 	}
