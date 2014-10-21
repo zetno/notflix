@@ -99,9 +99,10 @@ public class Model {
 	}
 
 	public boolean addUser(User newUser) {
-
 		if (newUser.getUsername().length() > 0
-				&& newUser.getPassword().length() > 0) {
+				&& newUser.getPassword().length() > 0
+				&& newUser.getFirstName().length() > 0
+				&& newUser.getSurname().length() > 0) {
 			for (User user : users) {
 				if (user.getUsername().equals(newUser.getUsername())) {
 					return false;
