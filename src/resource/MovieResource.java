@@ -36,11 +36,12 @@ public class MovieResource {
 		model = (Model) context.getAttribute("Model");
 
 		// user has to be logged in for access
-		if (model.verifyWithToken(token)) {
-			return model.getMovies();
-		} else {
-			return new ResponseMessage(401);
-		}
+		// if (model.verifyWithToken(token)) {
+		// return model.getMovies();
+		// } else {
+		// return new ResponseMessage(401);
+		// }
+		return model.getMovies();
 	}
 
 	@GET
