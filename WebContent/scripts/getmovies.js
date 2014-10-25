@@ -1,5 +1,12 @@
+$(window).on("hashchange", function() {
+	getMovies();
+});
 
 window.addEventListener("load", function() {
+	getMovies();
+});
+
+function getMovies() {
 
 	$.ajax({
 		url : "http://localhost:8080/Notflix/resources/movie/movielist",
@@ -7,9 +14,10 @@ window.addEventListener("load", function() {
 	}).fail(function(jqXHR, textStatus) {
 		alert("API Requestfailed:" + textStatus);
 	}).done(
+
 			function(data) {
 				// Do something with the data
-
+				$('#movieListview').empty();
 				for (var int = 0; int < data.length; int++) {
 					var array_element = data[int];
 
@@ -24,5 +32,4 @@ window.addEventListener("load", function() {
 			});
 
 	;
-
-});
+}
