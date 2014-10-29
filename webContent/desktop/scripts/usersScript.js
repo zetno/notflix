@@ -125,6 +125,6 @@ function userLogOff(){
 	$("#navMyRatings").css("visibility", "hidden");
 	$('#loggedin').text("");
 	$('#headerSignInOut').text("Sign in");
-	window.location.assign("http://localhost:8080/notflix");
+	window.location.assign("http://localhost:8080/Notflix");
 }
 
