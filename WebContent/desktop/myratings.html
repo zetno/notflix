@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/generic.css">
+		<link rel="stylesheet" type="text/css" href="styles/myRatingStyle.css">
+		<script src="scripts/jquery-1.8.2.min.js"></script>
+		<script src="scripts/myRatingScript.js"></script> 
+		<title>My Ratings</title>
+	</head>
+	<body>
+		<div id="header">
+			<a id="title">Notflix</a>
+			<nav>
+				<a href="home.html">Home</a>
+				<a id="navUsers" href="users.html">Users</a>
+				<a id="navMyRatings" href="myratings.html">My Ratings</a> 
+			</nav> 
+			<button id="headerSignInOut">Sign in</button>
+			<a id="loggedin">username</a>
+		</div>
+		
+		<div id="editRating"> 
+			<img id="editRatingClose" src="images/close.png" />
+			<a>Edit rating</a>
+			<input id="inputRating" type="number" max=10 min=1 name="inputRating">
+			<button id="btnEditRating">Edit</button>
+		</div>
+		
+		<div id="content">
+			<div id="movieDetailsContent">
+				<img id="movieDetailsClose" src="images/close.png" />
+				<div id="movieDetailsTitle"><a>title</a></div>
+				<div id="movieDetailsProducer"><a>producer</a></div>
+				<div id="movieDetailsImdb"><a>imdb</a></div>
+				<div id="movieDetailsLength"><a>length</a></div>
+				<div id="movieDetailsRating"><a>rating</a><button id="btnOpenEditRating">edit rating</button></div>
+				<div id="movieDetailsDate"><a>date</a></div>
+				<div id="movieDetailsDescription"><a>description</a></div>
+				<div id="movieDetailsImage"><img src="images/movie.jpg"/></div>
+			</div>
+			<ul id="movieList"></ul>
+		</div>
+			
+	</body>
+</html> 

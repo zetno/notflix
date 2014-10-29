@@ -1,0 +1,296 @@
+/*
+Register
+*/
+
+#register{
+	visibility: hidden;
+	background-color:white;
+	border-width: 10px;
+	border-color: lightgray;
+	border-style: solid;
+	width:300px;
+	height:300px;
+	top: 50%;
+	left: 50%;
+	margin-top: -150px;
+	margin-left: -150px;
+	position:fixed;
+	z-index:4;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	padding:10px;
+	padding-top:10px;
+}
+
+#registerClose{
+	position: absolute;
+	right: 10px;
+	top: 13px;
+	cursor: pointer;
+}
+
+#register div{
+	left: 5%;
+	top: 10%;
+	height: 10%;
+	position: relative;
+}
+
+#register input{
+	left: 50%;
+	position: relative;
+}
+
+#registerButton{
+	position: relative;
+}
+
+/*
+Sign in
+*/
+
+#signin{
+	visibility: hidden;
+	background-color:white;
+	border-width: 10px;
+	border-color: lightgray;
+	border-style: solid;
+	width:530px;
+	height:20px;
+	top: 50%;
+	left: 50%;
+	margin-top: -100px;
+	margin-left: -250px;
+	position:fixed;
+	z-index:4;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	padding:10px;
+	padding-top:10px;
+}
+
+#signinClose{
+	position: absolute;
+	right: 10px;
+	top: 13px;
+	cursor: pointer;
+}
+
+#signin a{
+	float: left;
+	margin-right: 10px;
+}
+
+#signin input{
+	float: left;
+	margin-right: 10px;
+}
+
+#signin button{
+	float: left;
+}
+
+/*
+Add rating
+*/
+
+#addRating{
+	visibility: hidden;
+	background-color:white;
+	border-width: 10px;
+	border-color: lightgray;
+	border-style: solid;
+	width:320px;
+	height:20px;
+	top: 50%;
+	left: 50%;
+	margin-top: -100px;
+	margin-left: -160px;
+	position:fixed;
+	z-index:4;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	padding:10px;
+	padding-top:10px;
+}
+
+#addRating img{
+	position: absolute;
+	right: 10px;
+	top: 13px;
+	cursor: pointer;
+}
+
+/*
+Movie row
+*/
+
+#movieList {
+	list-style-type: none;
+}
+
+#movieList ul{
+	text-align: center;
+}
+
+
+#movieList li {
+	height: 200px;
+	cursor: pointer;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: gray;
+}
+
+#movieList li:nth-child(even){
+	background-color: #EEEEEE;
+}
+
+#movieList li:nth-child(odd){
+	background-color: #FFFFFF;
+}
+
+#movieList li:hover{
+	background-color: #DDDDDD;
+}
+
+.row_image {
+	width: 20%;
+	position: relative;
+	float: left;
+	height:100%;
+	margin-right: 30px;
+	border-left-style: solid;
+	border-left-width: 2px;
+	border-left-color: gray;
+	border-right-style: solid;
+	border-right-width: 2px;
+	border-right-color: gray;
+}
+
+.row_title {
+	position: relative;
+	font-size: 40px;
+ 	height: 100px;
+	float: left; 
+	top: 40%;
+	width: 50%;
+}
+
+.row_rating {
+	position: relative;
+	text-align: right;
+	font-size: 60px;
+	font-weight: bold;
+ 	height: 100px;
+	float: left;
+	width: 20%;
+	top: 30%;
+	-ms-transform: rotate(10deg); 
+    -webkit-transform: rotate(10deg);
+    transform: rotate(10deg); 
+}
+
+/* 
+Movie Detail
+*/
+
+#movieDetailsContent{
+	visibility: hidden;
+	background-color:white;
+	border-width: 10px;
+	border-color: lightgray;
+	border-style: solid;
+	width:80%;
+	height:80%;
+	left: 10%;
+	top: 10%;
+	position:fixed;
+	z-index:2;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+}
+
+#movieDetailsContent div{
+	top: 10%;
+	height: 10%;
+	position: relative;
+}
+
+#movieDetailsTitle{
+	float: left;
+	left:10%;
+	width:50%;
+	z-index:1;
+}
+
+#movieDetailsTitle a{
+	padding-right: 40%;
+	font-weight: bold;
+}
+
+#movieDetailsImdb{
+	float: left;
+	left:10%;
+	z-index:1;
+	width:50%;
+}
+
+#movieDetailsRating{
+	float: left;
+	left:10%;
+	width:50%;
+	z-index:1;
+}
+
+#movieDetailsRating{
+	float: left;
+	left:10%;
+	width:50%;
+}
+
+#movieDetailsRating button {
+	margin-left: 10%;
+}
+
+#movieDetailsDescription{
+	float: left;
+	left:10%;
+	z-index:1;
+	width:35%;
+}
+
+#movieDetailsImage{
+	left: 15%;
+}
+
+#movieDetailsImage img{
+	height: 500%;
+	width: 30%;
+	border-style: solid;
+	border-width: 2px;
+	border-color: gray;
+}
+
+#movieDetailsClose{
+	position: absolute;
+	top:15px;
+	left: 95%;
+	cursor: pointer;
+}

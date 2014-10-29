@@ -1,0 +1,90 @@
+/*
+User row
+*/
+
+#usersList {
+	list-style-type: none;
+}
+
+#usersList ul{
+	text-align: center;
+}
+
+#usersList li {
+	height: 200px;
+	cursor: pointer;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: gray;
+}
+
+#usersList li:nth-child(even){
+	background-color: #EEEEEE;
+}
+
+#usersList li:nth-child(odd){
+	background-color: #FFFFFF;
+}
+
+#usersList li:hover{
+	background-color: #DDDDDD;
+}
+
+#row_username {
+	position: relative;
+	font-size: 40px;
+ 	height: 100px;
+	float: left; 
+	left: 10%;
+	top: 40%;
+	width: 50%;
+}
+
+/* 
+User Detail
+*/
+
+#userDetailsContent{
+	visibility: hidden;
+	background-color:white;
+	border-width: 10px;
+	border-color: lightgray;
+	border-style: solid;
+	width:80%;
+	height:60%;
+	left: 10%;
+	top: 10%;
+	position:fixed;
+	z-index:2;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+	-webkit-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+	box-shadow: 10px 10px 49px 0px rgba(0,0,0,1);
+}
+
+#userDetailsContent div{
+	top: 20%;
+	height: 15%;
+	position: relative;
+}
+
+#userDetailsTitle{
+	float: left;
+	left:10%;
+	width:50%;
+	z-index:1;
+}
+
+#userDetailsContent div{
+	left: 20%;
+	font-weight: bold;
+}
+
+#userDetailsClose{
+	position: absolute;
+	top:15px;
+	left: 95%;
+	cursor: pointer;
+}
