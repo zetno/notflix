@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Movie {
 
 	private int movieID;
-	private int ttNr;
+	private String ttNr;
 	private String title;
 	private Date date;
 	private int length;
@@ -24,7 +24,7 @@ public class Movie {
 
 	}
 
-	public Movie(int movieID, int ttNr, String title, Date date, int lenght,
+	public Movie(int movieID, String ttNr, String title, Date date, int lenght,
 			String producer, String description) {
 		this.movieID = movieID;
 		this.ttNr = ttNr;
@@ -54,11 +54,11 @@ public class Movie {
 		this.movieID = movieID;
 	}
 
-	public int getTtNr() {
+	public String getTtNr() {
 		return ttNr;
 	}
 
-	public void setTtNr(int ttNr) {
+	public void setTtNr(String ttNr) {
 		this.ttNr = ttNr;
 	}
 

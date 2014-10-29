@@ -21,29 +21,53 @@ public class Model {
 
 		User u1 = new User("Jan", "", "Henk", "jan123", "ww");
 		users.add(u1);
-		User u2 = new User("Kees", "", "Boom", "keesie", "boom");
+		User u2 = new User("Kees", "van", "Boom", "keesie", "boom");
 		users.add(u2);
-		User u3 = new User("Kees", "", "Boom", "jaap", "fsdflkd");
+		User u3 = new User("Peter", "", "Honing", "peter", "123");
 		users.add(u3);
 
-		Movie m1 = new Movie(1, 123, "The Movie", new Date(), 120, "Jan Henk",
-				"A great Movie");
-		Movie m2 = new Movie(2, 234, "The Movie Part two", new Date(), 120,
+		Movie m1 = new Movie(1, "0096895", "The Batman Movie", new Date(), 120, "Jan Henk",
+				"The Dark Knight of Gotham City begins his war on crime with his first major enemy being the clownishly homicidal Joker.");
+		Movie m2 = new Movie(2, "0059968", "The Batman Movie Part two", new Date(), 120,
 				"Jan Kees", "Another great Movie");
-		Movie m3 = new Movie(3, 345, "Movie the 3th", new Date(), 120,
-				"Jan Klaas", "Bad");
+		Movie m3 = new Movie(3, "0035665", "Batman Movie the 3th", new Date(), 120,
+				"Jan Klaar", "Bad");
+		Movie m4 = new Movie(4, "0078346", "Superman", new Date(), 120,
+				"Jan Klaac", "Bad");
+		Movie m5 = new Movie(5, "2975590", "Batman v Superman: Dawn of Justice", new Date(), 120,
+				"Jan Klaam", "Bad");
+		Movie m6 = new Movie(6, "0348150", "Superman Returns", new Date(), 120,
+				"Jan Klaaz", "Bad");
+		Movie m7 = new Movie(7, "0770828", "Man of Steel", new Date(), 120,
+				"Jan Klaven", "Bad");
 
 		movies.add(m1);
 		movies.add(m2);
 		movies.add(m3);
+		movies.add(m4);
+		movies.add(m5);
+		movies.add(m6);
+		movies.add(m7);
 
-		ratings.add(new Rating(u1, m1, 1));
-		ratings.add(new Rating(u2, m1, 3));
-		ratings.add(new Rating(u3, m1, 5));
-
+		ratings.add(new Rating(u1, m1, 10));
+		ratings.add(new Rating(u2, m1, 9));
+		ratings.add(new Rating(u3, m1, 9));
+		
+		ratings.add(new Rating(u1, m2, 3));
+		ratings.add(new Rating(u2, m2, 5));
+		
+		ratings.add(new Rating(u1, m3, 2));
+		
+		ratings.add(new Rating(u1, m4, 5));
+		
+		ratings.add(new Rating(u1, m5, 6));
+		
+		ratings.add(new Rating(u1, m6, 3));
+		
+		ratings.add(new Rating(u1, m7, 8));
 	}
 
-	public Object addRating(String token, int ttID, int rating) {
+	public Object addRating(String token, String ttID, int rating) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
@@ -62,7 +86,7 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object removeRating(String token, int ttID) {
+	public Object removeRating(String token, String ttID) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
@@ -71,7 +95,7 @@ public class Model {
 			if (doesRatingExists(ttID, username)) {
 				for (Rating r : ratings) {
 					if (r.getUser().getUsername().equals(username)
-							&& r.getMovie().getTtNr() == ttID) {
+							&& r.getMovie().getTtNr().equals(ttID)) {
 						ratings.remove(r);
 						ResponseMessage success = new ResponseMessage();
 						success.setStatusCode(200);
@@ -83,7 +107,7 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object editRating(String token, int ttID, int newRating) {
+	public Object editRating(String token, String ttID, int newRating) {
 
 		User user = getUserWithToken(token);
 		String username = user.getUsername();
@@ -93,7 +117,7 @@ public class Model {
 				if (doesRatingExists(ttID, username)) {
 					for (Rating r : ratings) {
 						if (r.getUser().getUsername().equals(username)
-								&& r.getMovie().getTtNr() == ttID) {
+								&& r.getMovie().getTtNr().equals(ttID)) {
 							r.setRating(newRating);
 							return r;
 						}
@@ -146,13 +170,13 @@ public class Model {
 		return ratingList;
 	}
 
-	public Object getRatingsFromMovie(int ttID) {
+	public Object getRatingsFromMovie(String ttID) {
 
 		if (doesMovieExists(ttID)) {
 			ArrayList<Rating> ratingList = new ArrayList<Rating>();
 
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getTtNr() == ttID) {
+				if (rating.getMovie().getTtNr().equals(ttID)) {
 					ratingList.add(rating);
 				}
 			}
@@ -161,7 +185,7 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Object getOverallRatingFromMovie(int ttID) {
+	public Object getOverallRatingFromMovie(String ttID) {
 
 		if (doesMovieExists(ttID)) {
 
@@ -169,7 +193,7 @@ public class Model {
 			int overallRating = 0;
 
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getTtNr() == ttID) {
+				if (rating.getMovie().getTtNr().equals(ttID)) {
 					counter++;
 					overallRating += rating.getRating();
 				}
@@ -187,8 +211,7 @@ public class Model {
 		Boolean check = true;
 
 		do {
-			token = Integer
-					.toString((int) (Math.floor((Math.random() * 100000000))));
+			token = Integer.toString((int) (Math.floor((Math.random() * 100000000))));
 
 			if (!tokens.containsKey(token)) {
 				check = false;
@@ -246,28 +269,28 @@ public class Model {
 		return new ResponseMessage(404);
 	}
 
-	public Movie getMovieByID(int ttnr) {
+	public Movie getMovieByID(String ttnr) {
 		for (Movie m : movies) {
-			if (m.getTtNr() == ttnr) {
+			if (m.getTtNr().equals(ttnr)) {
 				return m;
 			}
 		}
 		return null;
 	}
 
-	public boolean doesMovieExists(int ttID) {
+	public boolean doesMovieExists(String ttID) {
 		for (Movie movie : movies) {
-			if (movie.getTtNr() == ttID) {
+			if (movie.getTtNr().equals(ttID)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public boolean doesRatingExists(int ttID, String username) {
+	public boolean doesRatingExists(String ttID, String username) {
 		if (ratings.size() != 0) {
 			for (Rating rating : ratings) {
-				if (rating.getMovie().getTtNr() == ttID
+				if (rating.getMovie().getTtNr().equals(ttID)
 						&& rating.getUser().getUsername().equals(username)) {
 					return true;
 				}

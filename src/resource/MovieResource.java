@@ -36,27 +36,26 @@ public class MovieResource {
 		model = (Model) context.getAttribute("Model");
 
 		// user has to be logged in for access
-		if (model.verifyWithToken(token)) {
+//		if (model.verifyWithToken(token)) {
 			return model.getMovies();
-		} else {
-			return new ResponseMessage(401);
-		}
+//		} else {
+//			return new ResponseMessage(401);
+//		}
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Object getMovieByName(@HeaderParam("token") String token,
-			@PathParam("id") int ttNr) {
+	public Object getMovieByName(@PathParam("id") String ttNr) {
 
 		model = (Model) context.getAttribute("Model");
 
 		// user has to be logged in for access
-		if (model.verifyWithToken(token)) {
+//		if (model.verifyWithToken(token)) {
 			return model.getMovieByID(ttNr);
-		} else {
-			return new ResponseMessage(401);
+//		} else {
+//			return new ResponseMessage(401);
 
-		}
+//		}
 	}
 }
